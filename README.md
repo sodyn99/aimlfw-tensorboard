@@ -17,9 +17,9 @@ cd Tensorboard
 
 Logs:
 
-    ```bash
-    kubectl logs tensorboard-dashboard -n traininghost -f
-    ```
+```bash
+kubectl logs tensorboard-dashboard -n traininghost -f
+```
 
 ### Port-Forwarding
 
