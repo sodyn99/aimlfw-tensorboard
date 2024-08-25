@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tensorboard-dashboard
+  namespace: traininghost
+  labels:
+    app: tensorboard-dashboard
+spec:
+  containers:
+  - name: flask-app
+    image: python:3.11-slim-bookworm
+    command: ["/bin/bash"]
+    args:
+      - "-c"
+      - |
+        apt-get update && apt-get install -y curl unzip && \
+        pip3 install flask tensorflow==2.17.0 && \
+        python3 /app/app.py
+    ports:
+    - containerPort: 32108
+    - containerPort: 6006
+    volumeMounts:
+    - name: app-volume
+      mountPath: /app
+    - name: logs
+      mountPath: /logs
+  volumes:
+  - name: app-volume
+    hostPath:
+      path: "<HOST_PATH>"
+  - name: logs
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+  namespace: traininghost
+spec:
+  selector:
+    app: tensorboard-dashboard
+  ports:
+    - protocol: TCP
+      port: 32108
+      targetPort: 32108
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tensorboard-service
+  namespace: traininghost
+spec:
+  selector:
+    app: tensorboard-dashboard
+  ports:
+    - protocol: TCP
+      port: 6006
+      targetPort: 6006
