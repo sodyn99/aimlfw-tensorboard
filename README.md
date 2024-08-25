@@ -10,6 +10,8 @@ git clone https://github.com/sodyn99/aimlfw-tensorboard.git Tensorboard
 
 ```bash
 cd Tensorboard
+```
+```
 ./deploy.sh
 ```
 
