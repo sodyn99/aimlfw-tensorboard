@@ -15,7 +15,7 @@ cd Tensorboard
 ./deploy.sh
 ```
 
-*Please Wait:<br>Logs:
+*Please Wait*<br>Logs:
 
 ```bash
 kubectl logs tensorboard-dashboard -n traininghost -f
