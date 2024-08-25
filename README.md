@@ -11,8 +11,14 @@ git clone https://github.com/sodyn99/aimlfw-tensorboard.git Tensorboard
 ```bash
 cd Tensorboard
 ```
-```
+```bash
 ./deploy.sh
+```
+
+Log:
+
+```bash
+kubectl logs tensorboard-dashboard -n traininghost -f
 ```
 
 ### Port-Forwarding
